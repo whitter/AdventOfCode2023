@@ -1,10 +1,11 @@
-﻿if (args.Length == 0)
-{
-    Console.WriteLine("Please provide the day number as a command-line argument.");
-    return;
-}
+﻿//if (args.Length == 0)
+//{
 
-string dayNumber = args[0];
+//    Console.WriteLine("Please provide the day number as a command-line argument.");
+//    return;
+//}
+
+string dayNumber = "1"; //args[0];
 var filePath = "path/to/your/input/file.txt";
 
 string solverClassName = $"Day{dayNumber}Solver";
