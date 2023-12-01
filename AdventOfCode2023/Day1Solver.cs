@@ -7,7 +7,12 @@ public class Day1Solver : BaseSolver<string[], int>
 
     public override int SolvePart1(string[] inputData)
     {
-        return inputData.Select(x => int.Parse($"{x.First(char.IsNumber)}{x.Last(char.IsNumber)}")).Sum();
+        return inputData.Sum(x => int.Parse($"{x.First(char.IsNumber)}{x.Last(char.IsNumber)}"));
+    }
+
+    public override int SolvePart2(string[] inputData)
+    {
+        return inputData.Sum(ParseLines);
     }
 
     private Dictionary<string, char> DigitWords = new()
@@ -23,36 +28,29 @@ public class Day1Solver : BaseSolver<string[], int>
         { "nine", '9' }
     };
 
-    public override int SolvePart2(string[] inputData)
+    private int ParseLines(string line)
     {
-        List<int> results = [];
+        List<char> values = [];
 
-        foreach(var line in inputData)
+        for(var i = 0; i < line.Length; i++)
         {
-            List<char> values = [];
-
-            for(var i = 0; i < line.Length; i++)
+            if(char.IsNumber(line[i]))
             {
-                if(char.IsNumber(line[i]))
-                {
-                    values.Add(line[i]);
-                    continue;
-                }
-
-                foreach(var (word, digit) in DigitWords)
-                {
-                    if(i + word.Length - 1 < line.Length && line[i..(i + word.Length)] == word)
-                    {
-                        values.Add(digit);
-                        i += word.Length - 2;
-                        break;
-                    }                    
-                }
+                values.Add(line[i]);
+                continue;
             }
 
-            results.Add(int.Parse($"{values.First()}{values.Last()}"));
+            foreach(var (word, digit) in DigitWords)
+            {
+                if(i + word.Length - 1 >= line.Length || line[i..(i + word.Length)] != word)
+                {
+                    continue;
+                }     
+
+                values.Add(digit);               
+            }
         }
 
-        return results.Sum();
+        return int.Parse($"{values.First()}{values.Last()}");
     }
 }
