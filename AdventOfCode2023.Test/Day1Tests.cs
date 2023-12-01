@@ -1,5 +1,7 @@
 namespace AdventOfCode2023.Test;
 
+using AdventOfCode2023.Solvers;
+
 public class Day1Tests
 {
     [Fact]

@@ -1,4 +1,4 @@
-using System.Runtime.CompilerServices;
+namespace AdventOfCode2023.Solvers;
 
 public abstract class BaseSolver<TData, TResult> : ISolver<TData, TResult>
 {

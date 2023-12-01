@@ -1,3 +1,5 @@
+namespace AdventOfCode2023.Solvers;
+
 public class Day1Solver : BaseSolver<string[], int>
 {
     public override string[] ParseData(string rawData)
