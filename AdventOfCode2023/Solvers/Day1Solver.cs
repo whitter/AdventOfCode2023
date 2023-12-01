@@ -24,5 +24,5 @@ public class Day1Solver : BaseSolver<string[], int>
         return ParseNumber(line);
     }
 
-    private int ParseNumber(string line) => int.Parse($"{line.First(char.IsDigit)}{line.Last(char.IsNumber)}");
+    private int ParseNumber(string line) => int.Parse($"{line.First(char.IsNumber)}{line.Last(char.IsNumber)}");
 }
