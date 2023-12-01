@@ -3,9 +3,9 @@ using System.Diagnostics;
 
 var dayOption = new Option<string>(
     name: "--day",
-    description: "The file to read and display on the console.");
+    description: "The day number of the challange to run");
 
-var rootCommand = new RootCommand("Sample app for System.CommandLine")
+var rootCommand = new RootCommand("Advent of Code 2023")
 {
     dayOption
 };
