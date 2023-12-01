@@ -6,19 +6,21 @@
 //}
 
 string dayNumber = "1"; //args[0];
-var filePath = "path/to/your/input/file.txt";
+var filePath = $"day{dayNumber}_input.txt";
 
 string solverClassName = $"Day{dayNumber}Solver";
 var solverType = Type.GetType(solverClassName);
 
-if (solverType == null || !typeof(IAdventOfCodeSolver<,>).IsAssignableFrom(solverType))
+if (solverType == null)
 {
     Console.WriteLine("Invalid day number or solver class not found.");
     return;
 }
 
 dynamic? solver = Activator.CreateInstance(solverType);
-var inputData = solver!.ParseData(filePath);
+
+var rawData = File.ReadAllText(filePath);
+var inputData = solver!.ParseData(rawData);
 var part1Result = solver!.SolvePart1(inputData);
 var part2Result = solver!.SolvePart2(inputData);
 
