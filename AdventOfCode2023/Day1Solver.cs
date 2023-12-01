@@ -41,12 +41,12 @@ public class Day1Solver : BaseSolver<string[], int>
 
                 foreach(var (word, digit) in DigitWords)
                 {
-                    if(i + word.Length - 1 >= line.Length || line[i..(i + word.Length)] != word)
+                    if(i + word.Length - 1 < line.Length && line[i..(i + word.Length)] == word)
                     {
-                        continue;
-                    }
-
-                    values.Add(digit);
+                        values.Add(digit);
+                        i += word.Length - 2;
+                        break;
+                    }                    
                 }
             }
 
