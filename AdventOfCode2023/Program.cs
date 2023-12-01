@@ -1,5 +1,5 @@
 ﻿using System.CommandLine;
-using System.Reflection;
+using System.Diagnostics;
 
 var dayOption = new Option<string>(
     name: "--day",
@@ -23,7 +23,7 @@ void HandleProcess(string day, string part)
 {
     var filePath = $"{AppDomain.CurrentDomain.BaseDirectory}Data/day{day}_input.txt";
 
-    string solverClassName = $"Day{day}Solver";
+    string solverClassName = $"AdventOfCode2023.Solvers.Day{day}Solver";
     var solverType = Type.GetType(solverClassName);
 
     if (solverType == null)
@@ -33,6 +33,9 @@ void HandleProcess(string day, string part)
     }
 
     dynamic? solver = Activator.CreateInstance(solverType);
+
+    var timer = new Stopwatch();
+    timer.Start();
 
     var rawData = File.ReadAllText(filePath);
     var inputData = solver!.ParseData(rawData);
@@ -45,5 +48,7 @@ void HandleProcess(string day, string part)
         _ => new ArgumentException("Part invalid")
     };
 
-    Console.WriteLine($"Day {day} Part {part} Solution: {result}");
+    timer.Stop();
+
+    Console.WriteLine($"Day {day} Part {part} Solution: {result} ({timer.ElapsedMilliseconds}ms)");
 }
