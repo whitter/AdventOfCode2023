@@ -1,3 +1,5 @@
+namespace AdventOfCode2023;
+
 public static class Extensions
 {
     public static T[] SplitByNewline<T>(this string input)
