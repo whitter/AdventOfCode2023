@@ -1,5 +1,3 @@
-using System.Reflection.Metadata;
-
 namespace AdventOfCode2023.Solvers;
 
 public record Cube(string Color, int Count);
