@@ -16,7 +16,7 @@ public class Day2Solver : BaseSolver<Dictionary<int, IEnumerable<Cube>>, int>
 
                 var key = int.Parse(game[0].Split(' ')[1]);
                 var value = game[1]
-                    .SplitBy<string>(",", ";")
+                    .Split([',', ';'])
                     .Select(cube => {
                         var set = cube.Trim().Split(' ');
 
