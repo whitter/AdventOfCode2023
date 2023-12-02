@@ -1,9 +1,8 @@
+using System.Reflection.Metadata;
+
 namespace AdventOfCode2023.Solvers;
 
-public class Cube {
-    public string Color { get; set; } = null!;
-    public int Count { get; set;}
-}
+public record Cube(string Color, int Count);
 
 public class Day2Solver : BaseSolver<Dictionary<int, IEnumerable<Cube>>, int>
 {
@@ -18,8 +17,11 @@ public class Day2Solver : BaseSolver<Dictionary<int, IEnumerable<Cube>>, int>
                     .Select(cube => {
                         var set = cube.Trim().Split(' ');
 
-                        return new Cube { Color = set[1], Count = int.Parse(set[0]) };
-                    });
+                        return new Cube(set[1], int.Parse(set[0]));
+                    })
+                    .OrderByDescending(x => x.Count)
+                    .GroupBy(cube => cube.Color)
+                    .Select(cubes => cubes.First());
 
                 return new KeyValuePair<int, IEnumerable<Cube>>(key, value);
             })
@@ -38,11 +40,6 @@ public class Day2Solver : BaseSolver<Dictionary<int, IEnumerable<Cube>>, int>
             .Sum(game => game.Key);
     }
 
-    public override int SolvePart2(Dictionary<int, IEnumerable<Cube>> inputData) => inputData.Sum(PowerOfMaxCubes);
-
-    private int PowerOfMaxCubes(KeyValuePair<int, IEnumerable<Cube>> game) =>
-        game.Value
-            .GroupBy(cube => cube.Color)
-            .Select(cube => cube.Max(x => x.Count))
-            .Aggregate(1, (power, count) => power * count);
+    public override int SolvePart2(Dictionary<int, IEnumerable<Cube>> inputData) => 
+        inputData.Sum(x => x.Value.Aggregate(1, (power, set) => power * set.Count));
 }
