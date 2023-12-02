@@ -1,5 +1,3 @@
-using System.Security.Cryptography.X509Certificates;
-
 namespace AdventOfCode2023.Solvers;
 
 public class Cube {
@@ -40,8 +38,7 @@ public class Day2Solver : BaseSolver<Dictionary<int, IEnumerable<Cube>>, int>
             .Sum(game => game.Key);
     }
 
-    public override int SolvePart2(Dictionary<int, IEnumerable<Cube>> inputData) => inputData
-        .Sum(PowerOfMaxCubes);
+    public override int SolvePart2(Dictionary<int, IEnumerable<Cube>> inputData) => inputData.Sum(PowerOfMaxCubes);
 
     private int PowerOfMaxCubes(KeyValuePair<int, IEnumerable<Cube>> game) =>
         game.Value
