@@ -12,8 +12,8 @@ public class Day4Solver : BaseSolver<IEnumerable<Card>, int>
 
                 var id = int.Parse(card[0].SplitBy<string>(" ")[1]);
 
-                var winning = card[1].Trim().SplitBy<int>(" ");
-                var scratched = card[2].Trim().SplitBy<int>(" ");
+                var winning = card[1].SplitBy<int>(" ");
+                var scratched = card[2].SplitBy<int>(" ");
 
                 return new Card(id, scratched.Count(winning.Contains));
             });
