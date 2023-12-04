@@ -10,7 +10,7 @@ public class Day4Solver : BaseSolver<IEnumerable<Card>, int>
             .Select(line => {
                 var card = line.Split([':', '|']);
 
-                var id = int.Parse(card[0].Split(' ', StringSplitOptions.RemoveEmptyEntries)[1]);
+                var id = int.Parse(card[0].SplitBy<string>(" ")[1]);
 
                 var winning = card[1].Trim().SplitBy<int>(" ");
                 var scratched = card[2].Trim().SplitBy<int>(" ");
