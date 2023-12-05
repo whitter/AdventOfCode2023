@@ -15,7 +15,7 @@ public class Day4Solver : BaseSolver<int[], int>
             })
             .ToArray();
 
-    public override int SolvePart1(int[] inputData) => inputData.Sum(x => x > 0 ? 1 << x - 1 : 0);
+    public override int SolvePart1(int[] inputData) => inputData.Sum(x => x > 0 ? 1 << x - 1 : 0); 
 
     public override int SolvePart2(int[] inputData)
     {
