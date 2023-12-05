@@ -2,42 +2,33 @@ namespace AdventOfCode2023.Solvers;
 
 public record Card(int Id, int TotalWins);
 
-public class Day4Solver : BaseSolver<IEnumerable<Card>, int>
+public class Day4Solver : BaseSolver<int[], int>
 {
-    public override IEnumerable<Card> ParseData(string rawData) => 
+    public override int[] ParseData(string rawData) => 
         rawData
             .SplitByNewline<string>()
             .Select(line => {
-                var card = line.Split([':', '|']);
+                var winning = line[(line.IndexOf(':') + 1)..line.IndexOf('|')].SplitBy<string>(" ");
+                var scratched = line[(line.IndexOf('|') + 1)..].SplitBy<string>(" ");
 
-                var id = int.Parse(card[0].SplitBy<string>(" ")[1]);
+                return scratched.Count(winning.Contains);
+            })
+            .ToArray();
 
-                var winning = card[1].Trim().SplitBy<int>(" ");
-                var scratched = card[2].Trim().SplitBy<int>(" ");
+    public override int SolvePart1(int[] inputData) => inputData.Sum(x => x > 0 ? 1 << x - 1 : 0);
 
-                return new Card(id, scratched.Count(winning.Contains));
-            });
-
-    public override int SolvePart1(IEnumerable<Card> inputData) => inputData.Sum(x => (int)Math.Pow(2, x.TotalWins - 1));
-
-    public override int SolvePart2(IEnumerable<Card> inputData)
+    public override int SolvePart2(int[] inputData)
     {
-        int copies = 0;
+        int[] counts = Enumerable.Repeat(1, inputData.Length).ToArray();
 
-        var cards = inputData.ToDictionary(x => x.Id);
-
-        var queue = new Queue<Card>(inputData);
-
-        while(queue.TryDequeue(out var card))
+        for(var i = 0; i < inputData.Length; i++)
         {
-            copies++;
-
-            for(var i = 1; i <= card.TotalWins; i++)
+            for(var n = 1; n <= inputData[i]; n++)
             {
-                queue.Enqueue(cards[card.Id + i]);
+                counts[n + i] += counts[i];
             }
         }
 
-        return copies;
+        return counts.Sum();
     }
 }
