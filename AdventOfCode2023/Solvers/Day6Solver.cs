@@ -7,27 +7,17 @@ public class Day6Solver : BaseSolver<int[][], long>
 
     private static long CalculateCount(long time, long distance)
     {
-        var min = 0L;
+        double a = 1;
+        double b = -time;
+        double c = distance;
 
-        // TODO: insert GCSE maths here
+        double discriminant = b * b - 4 * a * c;
 
-        for(var speed = 1; speed <= time; speed++)
-        {
-            if(IsFaster(distance, speed, time))
-            {
-                min = speed;
-                break;
-            }
-        }
+        double x = -b / (2 * a);
+
+        var min = (long)(-b - (-b + Math.Sqrt(discriminant)) / (2 * a) + 1);
 
         return time - (min * 2) + 1;
-    }
-
-    private static bool IsFaster(long distance, long speed, long time)
-    {
-        var distance2 = speed * (time - speed);
-
-        return distance2 > distance;
     }
 
     public override long SolvePart1(int[][] inputData)
