@@ -1,4 +1,4 @@
-namespace AdventOfCode2023.Solvers;
+namespace AdventOfCode2023.Solvers.Day4;
 
 public record Card(int Id, int TotalWins);
 

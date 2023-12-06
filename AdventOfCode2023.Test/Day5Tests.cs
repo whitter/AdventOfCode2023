@@ -1,10 +1,10 @@
 namespace AdventOfCode2023.Test;
 
-using AdventOfCode2023.Solvers;
+using AdventOfCode2023.Solvers.Day5;
 
 public class Day5Tests
 {
-    private const string Data = @"seeds: 14
+    private const string Data = @"seeds: 79 14 55 13
 
 seed-to-soil map:
 50 98 2
@@ -59,6 +59,6 @@ humidity-to-location map:
 
         var result = solver.SolvePart2(data);
 
-        Assert.Equal(30, result);
+        Assert.Equal(46, result);
     }
 }

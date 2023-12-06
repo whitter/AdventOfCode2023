@@ -18,7 +18,7 @@ void HandleProcess(string day)
 {
     var filePath = $"{AppDomain.CurrentDomain.BaseDirectory}Data/day{day}_input.txt";
 
-    string solverClassName = $"AdventOfCode2023.Solvers.Day{day}Solver";
+    string solverClassName = $"AdventOfCode2023.Solvers.Day{day}.Day{day}Solver";
     var solverType = Type.GetType(solverClassName);
 
     if (solverType == null)

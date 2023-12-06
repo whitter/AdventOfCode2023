@@ -1,4 +1,4 @@
-namespace AdventOfCode2023.Solvers;
+namespace AdventOfCode2023.Solvers.Day1;
 
 public class Day1Solver : BaseSolver<string[], int>
 {

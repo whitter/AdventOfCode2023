@@ -1,4 +1,4 @@
-namespace AdventOfCode2023.Solvers;
+namespace AdventOfCode2023.Solvers.Day2;
 
 public record Cube(string Color, int Count);
 

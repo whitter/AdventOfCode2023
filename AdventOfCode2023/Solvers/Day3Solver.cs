@@ -1,6 +1,6 @@
 using System.Text.RegularExpressions;
 
-namespace AdventOfCode2023.Solvers;
+namespace AdventOfCode2023.Solvers.Day3;
 
 public record Part(int Number, (int y, int x)? Position);
 
