@@ -69,7 +69,7 @@ public class Day5Solver : BaseSolver<Garden, long>
 
         foreach(var mapper in inputData.Mappers)
         {
-            var temp = new List<(long From, long To)>();
+            var next = new List<(long From, long To)>();
             var maps = mapper.OrderBy(x => x.From);
 
             foreach(var range in ranges)
@@ -83,14 +83,14 @@ public class Day5Solver : BaseSolver<Garden, long>
 
                     if(before.From <= before.To)
                     {
-                        temp.Add(before);
+                        next.Add(before);
 
                         leftovers.From = From;
                     }
 
                     if(inside.From <= inside.To)
                     {
-                        temp.Add(inside);
+                        next.Add(inside);
 
                         leftovers.From = To + 1;
                     }
@@ -103,11 +103,11 @@ public class Day5Solver : BaseSolver<Garden, long>
 
                 if(leftovers.From < leftovers.To)
                 {
-                    temp.Add(leftovers);
+                    next.Add(leftovers);
                 }
             }
 
-            ranges = temp;
+            ranges = next;
         }
 
         return ranges.Min(x => x.From);
