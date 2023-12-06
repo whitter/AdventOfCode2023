@@ -3,18 +3,18 @@ namespace AdventOfCode2023.Solvers.Day6;
 public class Day6Solver : BaseSolver<int[][], long>
 {
     public override int[][] ParseData(string rawData) => rawData.SplitByNewline<string>()
-        .Select(line => line[(line.IndexOf(":") + 1)..].SplitBy<int>(" ")).ToArray();
+        .Select(line => line[(line.IndexOf(':') + 1)..].SplitBy<int>(" ")).ToArray();
 
-    private long CalculateCount(long time, long distance)
+    private static long CalculateCount(long time, long distance)
     {
-        var speed1 = 0L;
-        var speed2 = 0L;
+        var min = 0L;
+        var max = 0L;
 
         for(var speed = 1; speed <= time; speed++)
         {
             if(IsFaster(distance, speed, time))
             {
-                speed1 = speed;
+                min = speed;
                 break;
             }
         }
@@ -23,24 +23,19 @@ public class Day6Solver : BaseSolver<int[][], long>
         {
             if(IsFaster(distance, speed, time))
             {
-                speed2 = speed;
+                max = speed;
                 break;
             }
         }
 
-        return speed2 - speed1 + 1;
+        return max - min + 1;
     }
 
     private static bool IsFaster(long distance, long speed, long time)
     {
         var distance2 = speed * (time - speed);
 
-        if(distance2 > distance)
-        {
-            return true;
-        }
-
-        return false;
+        return distance2 > distance;
     }
 
     public override long SolvePart1(int[][] inputData)
