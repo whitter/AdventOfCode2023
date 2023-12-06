@@ -74,39 +74,36 @@ public class Day5Solver : BaseSolver<Garden, long>
 
             foreach(var range in ranges)
             {
-                var range2 = range;
+                var leftovers = range;
 
                 foreach(var (From, To, Delta) in maps)
                 {
-                    if(range2.From < From)
+                    (long From, long To) before = (leftovers.From, Math.Min(leftovers.To, From - 1));
+                    (long From, long To) inside = (leftovers.From + Delta, Math.Min(leftovers.To, To) + Delta);
+
+                    if(before.From <= before.To)
                     {
-                        temp.Add((range2.From, Math.Min(range2.To, From - 1)));
+                        temp.Add(before);
 
-                        range2.From = From;
-
-                        if(range2.From >= range2.To)
-                        {
-                            break;
-                        }
+                        leftovers.From = From;
                     }
 
-                    if(range2.From <= To)
+                    if(inside.From <= inside.To)
                     {
-                        temp.Add((range2.From + Delta, Math.Min(range2.To, To) + Delta));
+                        temp.Add(inside);
 
-                        range2.From = To + 1;
-
-                        if(range2.From >= range2.To)
-                        {
-                            break;
-                        }
+                        leftovers.From = To + 1;
                     }
 
+                    if(leftovers.From >= leftovers.To)
+                    {
+                        break;
+                    }
                 }
 
-                if(range2.From < range2.To)
+                if(leftovers.From < leftovers.To)
                 {
-                    temp.Add(range2);
+                    temp.Add(leftovers);
                 }
             }
 

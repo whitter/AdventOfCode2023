@@ -44,7 +44,7 @@ public class Day6Solver : BaseSolver<int[][], long>
 
         for(var race = 0; race < inputData[0].Length; race++)
         {
-            var fastest = new List<int>();
+            var fastest = new List<long>();
 
             var time = inputData[0][race];
             var distance = inputData[1][race];
