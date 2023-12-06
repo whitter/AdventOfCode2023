@@ -8,7 +8,8 @@ public class Day6Solver : BaseSolver<int[][], long>
     private static long CalculateCount(long time, long distance)
     {
         var min = 0L;
-        var max = 0L;
+
+        // TODO: insert GCSE maths here
 
         for(var speed = 1; speed <= time; speed++)
         {
@@ -19,16 +20,7 @@ public class Day6Solver : BaseSolver<int[][], long>
             }
         }
 
-        for(var speed = time; speed >= 0; speed--)
-        {
-            if(IsFaster(distance, speed, time))
-            {
-                max = speed;
-                break;
-            }
-        }
-
-        return max - min + 1;
+        return time - (min * 2) + 1;
     }
 
     private static bool IsFaster(long distance, long speed, long time)
