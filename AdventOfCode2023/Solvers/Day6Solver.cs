@@ -7,13 +7,11 @@ public class Day6Solver : BaseSolver<int[][], long>
 
     private static long CalculateCount(long time, long distance)
     {
-        double a = 1;
-        double b = -time;
-        double c = distance;
+        var a = 1;
+        var b = -time;
+        var c = distance;
 
-        double discriminant = b * b - 4 * a * c;
-
-        double x = -b / (2 * a);
+        var discriminant = b * b - 4 * a * c;
 
         var min = (long)(-b - (-b + Math.Sqrt(discriminant)) / (2 * a) + 1);
 
